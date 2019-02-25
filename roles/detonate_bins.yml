@@ -1,0 +1,26 @@
+########################################################
+# Copy executables
+########################################################
+- name: Copy executables
+  win_copy:
+    src: "{{ item }}"
+    dest: 'C:\Windows\System32\'
+  with_fileglob:
+    - "exes/*"
+
+##########################################################
+# Run executables
+##########################################################
+- debug:
+    msg: "{{ item }}"
+  with_fileglob:
+    - "exes/*"
+
+- name: Run executables
+  win_shell: 'runas /trustlevel:0x20000 {{ item | basename }}'
+  async: 45
+  poll: 0
+  args:
+    chdir: '{{ windows_malware_loc }}'
+  with_fileglob:
+    - "exes/*"

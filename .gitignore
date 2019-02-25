@@ -1,0 +1,5 @@
+exes/*
+group
+hosts.ini
+group_vars/windows.yml
+*.retry

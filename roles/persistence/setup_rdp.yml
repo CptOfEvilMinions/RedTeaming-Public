@@ -1,0 +1,27 @@
+#########################################################
+# Enable Remote Desktop
+#########################################################
+- name: Enable RDP
+  win_regedit:
+    path: 'HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server'
+    name: 'fDenyTSConnections'
+    data: '0'
+    type: 'dword'
+
+- name: Enable RDP greyed out
+  win_regedit:
+    path: 'HKLM:\Software\Policies\Microsoft\Windows NT\Terminal Services'
+    name: 'fDenyTSConnections'
+    data: '0'
+    type: 'dword'
+
+- name: Firewall rule to allow RDP on TCP port 3389
+  win_firewall_rule:
+    name: Remote Desktop
+    localport: 3389
+    action: allow
+    direction: in
+    protocol: tcp
+    profiles: private
+    state: present
+    enabled: yes
