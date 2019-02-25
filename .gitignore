@@ -1,5 +1,4 @@
-exes/*
-group
-hosts.ini
-group_vars/windows.yml
+WindowsDeployment/exes/*
+WindowsDeployment/hosts.ini
+WindowsDeployment/group_vars/windows.yml
 *.retry
